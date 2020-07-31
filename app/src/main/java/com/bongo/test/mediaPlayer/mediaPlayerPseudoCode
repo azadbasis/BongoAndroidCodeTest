@@ -1,0 +1,88 @@
+ A video player application with ‘Play’, ‘Forward’, ‘Rewind’ functionalities.
+------------------------------------------------------------------------------------
+Application class: MainActivity
+Superclass: AppCompatActivity
+InterFace:  Player
+Use Classes: MediaPlayer
+   PLAYER
+   play()
+   forward()
+   rewind()
+
+MainActivity.java:
+   START Program
+
+    SET, INIT:
+    Button play,forward,rewind
+    MediaPlayer mediaPlayer;
+    variable startTime  is equal to 0
+    variable finalTime is equal to 0
+    Create a Handler object
+    variable  forwardTime is equal to 5000
+    variable  backwardTime is equal to 5000
+    SeekBar seekbar
+    TextView songName,songStartTime,songFinaTime;
+
+function onCreate
+  START
+   Create a play  object
+   Create a forward  object
+   Create a rewind  object
+   Create a songStartTime  object
+   Create a songFinalTime  object
+   Register MediaPlayer with video file
+   Create a seekbar  object
+   set seekbar disable
+    play == ONCLICK
+    Tell play function
+    forward == ONCLICK
+    Tell forward function
+    rewind == ONCLICK
+    Tell rewind function
+ End
+
+ function play
+ START
+      start mediaPlayer
+        finalTime is equal to mediaPlayer Duration
+        startTime is equal to mediaPlayer CurrentPosition;
+
+      IF oneTimeOnly == 0 THEN
+         seekbar set maximum time is equal to finalTime
+         oneTimeOnly is equal to 1
+        set songStartTime with startTime
+        set songFinalTime with finalTime
+        set seekbar setProgress with startTime
+        myHandler delay 100 ms
+        pause button enable
+       play button disable
+    ENDIF
+
+ END
+
+function forward
+    START
+      variable temp is equal to startTime
+      IF temp add forwardTime == finalTime THEN
+          startTime is equal to startTime plus forwardTime
+          set mediaPlayer seekTo startTime
+          output:You have Jumped forward 5 seconds
+      ELSE
+          output:Cannot jump forward 5 seconds
+      ENDIF
+    END
+
+function rewind
+     START
+        variable temp is equal to startTime
+        IF temp subtract backwardTime > 0  THEN
+             startTime is equal to startTime subtract backwardTime;
+             set mediaPlayer seekTo startTime
+             output:You have Jumped backward 5 seconds
+        ELSE
+            output:Cannot jump backward 5 seconds
+    ENDIF
+   END
+
+  End Program
+
